@@ -1,18 +1,15 @@
-// SPDX-License-Identifier: UNLICENSED
-pragma solidity ^0.8.13;
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
 
-import {Script, console2} from "forge-std/Script.sol";
-import {Counter} from "../src/Counter.sol";
+import {Script} from "forge-std/Script.sol";
+import {safeconsole} from "forge-std/safeconsole.sol";
+import {AquariDeploy} from "./Aquari.s.sol";
 
-contract Deploy is Script {
-    modifier broadcast() {
+contract Deploy is AquariDeploy, Script {
+    function run() public {
+        safeconsole.log("Chain Id: ", block.chainid);
         vm.startBroadcast();
-        _;
+        _run();
         vm.stopBroadcast();
-    }
-
-    function run() public broadcast {
-        Counter counter = new Counter();
-        counter.increment();
     }
 }
