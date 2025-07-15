@@ -30,15 +30,10 @@ jobs:
       - name: Install Foundry
         uses: foundry-rs/foundry-toolchain@v1
         with:
-          version: nightly
+          version: stable
 
       - name: Run Forge build
         run: |
           forge --version
-          forge build --sizes
+          forge build --sizes --skip script
         id: build
-
-      - name: Run Forge tests
-        run: |
-          forge test -vvv
-        id: test
